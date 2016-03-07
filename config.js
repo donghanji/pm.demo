@@ -10,6 +10,7 @@
 			'tempjs':'../pm.demo/pm.core.test/tempjs',
 			'pmmodule':'../pm.modules/dist',
 			'pmplugin':'../pm.plugins/src',
+			'pmmobile':'../pm.mobi',
 			'libs':'pm.modules/libs'
 		},
 		alias:{
@@ -47,8 +48,11 @@
 			'pm.app.view.buy':'{tempjs}/pm.app.view.buy',
 	        'pm.app.view.one':'{tempjs}/pm.app.view.one',
 	        'pm.app.view.two':'{tempjs}/pm.app.view.two',
-	        'pm.app.view.three':'{tempjs}/pm.app.view.three'
+	        'pm.app.view.three':'{tempjs}/pm.app.view.three',
 	        /** pm core test end */
+
+	        /** pm mobile test end */
+	        'pm.mobi':'{pmmobile}/pm.mobi'
 		},
 		files:[],
 		globals:{
