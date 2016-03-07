@@ -6,6 +6,8 @@
 		dirs:{
 			'pmtest':'pm.demo/pm.test',
 			'pmuitest':'../pm.ui/src/js',
+			'pmcoretest':'../pm.core/src',
+			'tempjs':'../pm.demo/pm.core.test/tempjs',
 			'pmmodule':'../pm.modules/dist',
 			'pmplugin':'../pm.plugins/src',
 			'libs':'pm.modules/libs'
@@ -31,9 +33,22 @@
 			//'os':'https://raw.githubusercontent.com/donghanji/plugins/master/dest/os.min.js',
 			'os':'{pmplugin}/os',
 			'jquery.flexslider':'{libs}/jquery.flexslider/jquery.flexslider',
-			'jquery.flexslider.module':'{pmmodule}/jquery.flexslider.module'
+			'jquery.flexslider.module':'{pmmodule}/jquery.flexslider.module',
 			/** pm ui test end */
 
+			/** pm core test start */
+			'pm':'{pmcoretest}/pm',
+            'pm.ajax':'{pmcoretest}/pm.ajax',
+            'pm.config':'{pmcoretest}/pm.config',
+            'pm.dataset':'{pmcoretest}/pm.dataset',
+            'pm.view':'{pmcoretest}/pm.view',
+            'pm.analytics':'{pmcoretest}/pm.analytics',
+			//
+			'pm.app.view.buy':'{tempjs}/pm.app.view.buy',
+	        'pm.app.view.one':'{tempjs}/pm.app.view.one',
+	        'pm.app.view.two':'{tempjs}/pm.app.view.two',
+	        'pm.app.view.three':'{tempjs}/pm.app.view.three'
+	        /** pm core test end */
 		},
 		files:[],
 		globals:{
