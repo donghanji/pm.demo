@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="default">
+	<title></title>
+	<link type="text/css" rel="stylesheet" href="../../pm.mobi/pm.mobi.css"/>
+</head>
+<body>
+	<div data-role="views">
+		<!--global header-->
+		<div data-role="header">
+			<h1 data-role="title">global header</h1>
+			<a data-role="goback">global go back</a>
+		</div>
+		<!--view1-->
+		<div id="view1" data-role="view" data-header data-footer data-actived>
+			<!----><div data-role="header">
+				<h1 data-role="title">view 1 header</h1>
+				<a data-role="goback">view 1 goback</a>
+			</div>
+			<div data-role="content">
+				<p>view 1</p>
+				<a data-to="#view2">to view 2</a>
+			</div>
+			<div data-role="footer">view 1 footer</div>
+		</div>
+		<!--view2-->
+		<div id="view2" data-role="view" data-title="view 2 Title" data-header=false data-loading data-destroy="empty" data-content="html/content.html">
+			<div data-role="header">
+				<h1 data-role="title"></h1>
+				<a data-role="goback">go back</a>
+			</div>
+			<div data-role="content">
+				
+			</div>
+			<div data-role="footer">view 2 footer</div>
+		</div>
+		<!--view3-->
+		<div id="view3" data-role="view">
+			<div data-role="header">
+				<h1 data-role="title"></h1>
+				<a data-role="goback">go back</a>
+			</div>
+			<div data-role="content">
+				<p>view 3/p>
+				<a data-to="#view4">to view 4</a>
+			</div>
+			<div data-role="footer">view 3 footer</div>
+		</div>
+		<!--view4-->
+		<!--<div id="view4" data-role="view">
+			<div data-role="header">
+				<h1 data-role="title"></h1>
+				<a data-role="goback"></a>
+			</div>
+			<div data-role="content">
+				<a data-to="#view2"></a>
+			</div>
+			<div data-role="footer"></div>
+		</div>-->
+		<!--global footer-->
+		<div data-role="footer">global view footer</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../pm/module.js"></script>
+<script type="text/javascript" src="../config.js"></script>
+<script type="text/javascript">
+(function(){
+	module.declare(['pm.mobi'],function(require){
+		var Mobi=require('pm.mobi');
+		
+		var mobi=new Mobi({
+			zIndex:10,
+			//setRem:true,
+			//markup:'selection',
+			//duration:'13250ms',
+			duration:'325ms',
+			//direction:'h',
+			translateOffset:180,
+			translateDelay:1,//10ms,can't be set 0，3-10
+			loading:function(){
+
+				return '<div data-role="loading">global loading ...</div>'
+			}
+		});
+
+		//
+		mobi.view({
+			el:'#view1',
+			events:{
+				'click':'handleClick'
+			},
+			mobis:{
+				header:function(){
+					return '<div data-role="header"><h1 data-role="title">go view header</h1><a data-role="goback">global go xx back</a></div>';
+				},//'<div></div>'
+				footer:true,//<div></div>
+				loading:true,//false
+				content:function(){
+
+
+					return '<div>View load Content  Test!<a data-to="#view2">to view 2</a></div>'
+				},
+				actived:true,//false
+				destroy:'empty',//remove
+
+				//
+				load:function(){
+					console.log('load');
+				},
+				perload:function(){
+					console.log(new Date().getTime());
+					console.log('preload');
+				},
+				loaded:function(){
+					console.log('loaded');
+				},
+				perloaded:function(){
+					console.log(this.mobis);
+					console.log(new Date().getTime());
+					console.log('preloaded');
+				},
+				refresh:function(){
+					console.log('refresh');
+				},
+				leave:function(){
+					console.log('leave');
+				},
+				goback:function(data){
+					console.log('custom go back');
+					var el=data.el;
+
+					mobi.goback(el);
+				}
+			},
+			handleClick:function(){
+				/*console.log('handleClick');
+				console.log(this);
+				this.mobis.perload.call(this);
+				mobi.goback();*/
+				console.log('view 1 ,handleClick');
+			}
+		});
+		/*
+		var mobi2=new Mobi();
+		//
+		mobi2.view({
+			el:'#view1',
+			preload:function(){
+
+			},
+			load:function(){
+
+			},
+			perload:function(){
+
+			},
+			perloaded:function(){
+
+			}
+		});
+		*/
+		//view 3
+		mobi.view({
+			el:'#view3'
+		});
+
+		//view 4
+		mobi.view({
+			el:'#view4',
+			events:{
+				'click':'handleClick'
+			},
+			mobis:{
+				header:'<div data-role="header"><a data-role="goback">go back x</a></div>',
+				content:'<div><p>view 4</p><a data-to="#view1" data-direction="v">to view 1</a></div>',
+				load:function(){
+					console.log('view 4 ,load');
+				},
+				perload:function(){
+					var view3=mobi.view('#view3');
+					console.log('view3',view3);
+					console.log(this.mobis.data);
+					console.log('view 4 ,perload');
+					this.$view.find('[data-role="content"]').text('content test');
+				},
+				loaded:function(){
+					console.log('view 4 ,loaded');
+				},
+				perloaded:function(){
+					console.log('view 4 ,perloaded');
+				}
+			},
+			handleClick:function(){
+				console.log('--view 4--');
+			}
+		});
+
+		/*mobi.load('#view4',{
+			data:{t:'t'}
+		});*/
+		//mobi.goback();
+	});
+})();
+</script>
+</html>

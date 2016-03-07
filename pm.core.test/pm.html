@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>pm.js</title>
+        <style type="text/css" rel="stylesheet">
+        html,body{width:100%;height:100%;margin:0;padding:0;}
+        </style>
+    </head>
+    <body>
+        
+    </body>
+    <script type="text/javascript" src="../../pm/module.js"></script>
+    <script type="text/javascript" src="../config.js"></script>
+    <script type="text/javascript">
+    (function(){
+        //
+        var $global=module.globals('$');
+        //
+        module.declare([$global,'pm'],function(require){
+            var pm=require('pm');
+            //实例一
+            pm.ns('app');//方式一
+            //pm.ns('pm.app');//方式二
+            //pm.namespace('app');//方式三
+            //pm.namespace('pm.app');//方式四
+            console.log(pm.app);
+            
+            //实例二
+            pm.ns('app.view');
+            pm.app.view=function(){
+                //
+            };
+            console.log(pm.app.view);
+        });
+    })();
+    </script>
+</html>
