@@ -23,7 +23,7 @@ Notice that only in the same folder.
 Third,
 
     cd your-director/pm.modules,
-    grunt install
+    npm install
     grunt
 
 
